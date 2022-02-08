@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.seezoon</groupId>
+        <version>1.0.0</version>
+        <artifactId>seezoon-distributed-id</artifactId>
+    </parent>
+
+    <artifactId>seezoon-distributed-id-stub</artifactId>
+
+    <properties>
+        <protoc.version>3.12.0</protoc.version>
+        <grpc.version>1.42.1</grpc.version>
+        <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
+        <os-maven-plugin.version>1.6.2</os-maven-plugin.version>
+        <javax.annotation-api.version>1.3.2</javax.annotation-api.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-stub</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-protobuf</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>${javax.annotation-api.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>${os-maven-plugin.version}</version>
+            </extension>
+        </extensions>
+        <plugins>
+            <!-- usage see https://www.xolstice.org/protobuf-maven-plugin/compile-custom-mojo.html -->
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>${protobuf-maven-plugin.version}</version>
+                <configuration>
+                    <protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}</protocArtifact>
+                    <pluginId>grpc-java</pluginId>
+                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
+                    <!-- 默认路径，可以自行指定
+                    <protoSourceRoot>src/main/proto</protoSourceRoot>
+                     <outputDirectory>${project.build.directory}/generated-sources/protobuf/java</outputDirectory>
+                    -->
+                    <!-- 生成到src 这样 -->
+                    <!--
+                    <protoSourceRoot>src/main/proto</protoSourceRoot>
+                    <outputDirectory>src/main/java</outputDirectory>
+                    <clearOutputDirectory>false</clearOutputDirectory>
+                    -->
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>compile-custom</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,10 @@
+# 环境标识，开发环境有意义，测试及生产无意义,作为打印标识可以自己定义如:test,prod,uat
+spring:
+  profiles:
+    active: local
+grpc:
+  server:
+    port: 9000
+    interceptors:
+      - com.seezoon.grpc.support.TraceServerInterceptor
+      - com.seezoon.grpc.support.ServerExceptionInterceptor

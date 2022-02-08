@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.seezoon</groupId>
+    <artifactId>seezoon-distributed-id</artifactId>
+    <name>${project.artifactId}</name>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <seezoon-bom.version>1.0.0-SNAPSHOT</seezoon-bom.version>
+        <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
+        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+        <maven-archetype-plugin.version>3.2.1</maven-archetype-plugin.version>
+        <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
+    </properties>
+    <dependencies>
+        <!--contains junit 5-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--
+            hot load,for idea must set
+            1.File-Settings-Compiler-Build Project automatically
+            2.Compiler autoMake allow when app running = true
+            -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>com.seezoon</groupId>
+                <artifactId>seezoon-dependencies-bom</artifactId>
+                <version>${seezoon-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.seezoon</groupId>
+                <artifactId>seezoon-distributed-id-stub</artifactId>
+                <version>${project.version}}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <plugins>
+            <!--mvn versions:set -DnewVersion=1.0.1-SNAPSHOT-->
+            <!-- https://www.mojohaus.org/versions-maven-plugin/usage.html  -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${versions-maven-plugin.version}</version>
+                <configuration>
+                    <generateBackupPoms>false</generateBackupPoms>
+                </configuration>
+            </plugin>
+            <!-- mvn archetype:create-from-project -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-archetype-plugin</artifactId>
+                <version>${maven-archetype-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+    <modules>
+        <module>seezoon-distributed-id-server</module>
+        <module>seezoon-distributed-id-stub</module>
+    </modules>
+
+</project>
