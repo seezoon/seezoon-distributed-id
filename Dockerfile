@@ -8,6 +8,6 @@ ENV IN_CONTAINER=true
 # just src content
 COPY target/${MODULE_NAME} /data/${MODULE_NAME}/
 
-EXPOSE 8080
+EXPOSE 8080 9000 7001
 ENTRYPOINT ["bin/docker-entrypoint.sh"]
 CMD ["start"]
