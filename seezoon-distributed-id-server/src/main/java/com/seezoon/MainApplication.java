@@ -13,7 +13,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableConfigurationProperties({SegmentProperties.class})
 public class MainApplication implements CommandLineRunner {
 
-
     public static void main(String[] args) {
         SpringApplication.run(MainApplication.class, args);
     }

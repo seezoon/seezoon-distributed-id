@@ -32,10 +32,6 @@
         </dependency>
         <dependency>
             <groupId>com.seezoon</groupId>
-            <artifactId>redis-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.seezoon</groupId>
             <artifactId>grpc-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
@@ -48,9 +44,33 @@
             <artifactId>perf4j</artifactId>
             <version>${perf4j.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
     </dependencies>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+                <configuration>
+                    <delimiters>
+                        <delimiter>@</delimiter>
+                    </delimiters>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>

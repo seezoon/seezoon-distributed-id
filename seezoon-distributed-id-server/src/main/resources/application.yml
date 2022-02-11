@@ -2,9 +2,21 @@
 spring:
   profiles:
     active: local
+  application:
+    name: "@project.artifactId@"
 grpc:
   server:
     port: 9000
     interceptors:
       - com.seezoon.grpc.support.TraceServerInterceptor
       - com.seezoon.grpc.support.ServerExceptionInterceptor
+management:
+  server:
+    port: 7001
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}

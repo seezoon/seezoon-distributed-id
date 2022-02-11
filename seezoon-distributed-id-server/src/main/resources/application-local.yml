@@ -16,10 +16,8 @@ grpc:
       interceptors:
         - com.seezoon.grpc.support.TraceClientInterceptor
     channels:
-      distributed-id-service:
+      distributed-id-service-channel:
         target: 127.0.0.1:9000
     stubs:
-      - clazz: com.seezoon.DistributedIdGrpc.DistributedIdStub
-        channel: distributed-id-service
       - clazz: com.seezoon.DistributedIdGrpc.DistributedIdBlockingStub
-        channel: distributed-id-service
+        channel: distributed-id-service-channel

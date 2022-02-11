@@ -10,7 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class SegmentProperties {
 
     /**
-     * 启动后获取一次提前缓存
+     * 启动后获取一次提前缓存，默认需要第一次获取才会全部缓存
      */
     private boolean initGet;
     /**
