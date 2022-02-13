@@ -46,10 +46,6 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/seezoon-distributed-id?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&connectTimeout=1000&socketTimeout=60000&rewriteBatchedStatements=true
     username: root
     password:
-grpc:
-  server:
-    # 可选，方便使用grpcurl 工具测试，测试命令grpcurl -plaintext -d '{"bizTag":"xxx"}' localhost:9000 com.seezoon.DistributedId/Get 
-    support-reflection: true
 ```
 
 ## 3、验证

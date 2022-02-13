@@ -6,18 +6,9 @@ spring:
     password:
 id:
   server:
-    enableAuth: true
+    enableAuth: false
     init-get: true
 grpc:
-  server:
-    support-reflection: true
   client:
-    common:
-      interceptors:
-        - com.seezoon.grpc.support.TraceClientInterceptor
-    channels:
-      distributed-id-service-channel:
-        target: 127.0.0.1:9000
-    stubs:
-      - clazz: com.seezoon.DistributedIdGrpc.DistributedIdBlockingStub
-        channel: distributed-id-service-channel
+    distributed-id-server:
+      address: static://127.0.0.1:9000

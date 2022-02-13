@@ -8,8 +8,11 @@ import io.grpc.StatusRuntimeException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * grpc rpc 远程调用时候无法通过grpc client拦截器完成统一异常处理
+ */
 @RestControllerAdvice
-public class GrpcExceptionAdvice {
+public class GrpcWebExceptionAdvice {
 
     @ExceptionHandler({StatusRuntimeException.class})
     public Result statusRuntimeException(StatusRuntimeException e) {
