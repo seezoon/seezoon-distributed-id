@@ -4,6 +4,11 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/seezoon-distributed-id?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&connectTimeout=1000&socketTimeout=60000&rewriteBatchedStatements=true
     username: root
     password:
+  zipkin:
+    sender:
+      type: web
+    base-url: http://127.0.0.1:9411
+    enabled: false
 id:
   server:
     enableAuth: false
