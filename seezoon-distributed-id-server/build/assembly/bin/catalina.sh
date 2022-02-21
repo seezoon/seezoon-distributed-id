@@ -16,6 +16,9 @@ start() {
     RUN_JAVA=${JAVA_HOME}/bin/java
     echo "JAVA_HOME=${JAVA_HOME}"
   fi
+  CLASS_PATH="-cp ./lib/*:./conf${CLASS_PATH}"
+  JAVA_OPTS="${CLASS_PATH} ${JVM_MEM} ${JVM_ARGS} ${JVM_DEBUG}"
+
   if [ -n "${JAVA_OPTS}" ]; then
     echo "JAVA_OPTS=${JAVA_OPTS}"
   fi

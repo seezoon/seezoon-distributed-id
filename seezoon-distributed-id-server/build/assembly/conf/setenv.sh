@@ -1,7 +1,10 @@
 #!/bin/bash
 set -e
+# 不指定这获取环境中java命令
+#JAVA_HOME=
 MAIN_CLASS="com.seezoon.MainApplication"
-CLASS_PATH="-cp ./lib/*:./conf"
+# 可加入自定的目录
+#CLASS_PATH=""
 LOG_PATH="./logs"
 
 #JVM_MEM="-Xmx512m -Xms128m"
@@ -10,10 +13,6 @@ if [ "${IN_CONTAINER}" = true ]; then
 fi
 #JVM_DEBUG="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
 JVM_ARGS="-XX:AutoBoxCacheMax=2000 -XX:+UseG1GC -verbose:gc -Xlog:gc*,safepoint:${LOG_PATH}/gc.log:time,uptime:filecount=1,filesize=10M -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=${LOG_PATH}/dump -XX:ErrorFile=${LOG_PATH}/hs_err_%p.log"
-JAVA_OPTS="${CLASS_PATH}"
-JAVA_OPTS="${JAVA_OPTS} ${JVM_MEM}"
-JAVA_OPTS="${JAVA_OPTS} ${JVM_ARGS}"
-JAVA_OPTS="${JAVA_OPTS} ${JVM_DEBUG}"
 #优雅关机等待时间
 SHUTDOWN_SECONDS=30
 # 如果是多环境配置文件内置，则添加 --spring.profiles.active=${env}
