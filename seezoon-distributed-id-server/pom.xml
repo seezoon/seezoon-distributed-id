@@ -90,7 +90,7 @@
                 <configuration>
                     <attach>false</attach>
                     <appendAssemblyId>false</appendAssemblyId>
-                    <finalName>${project.artifactId}</finalName>
+                    <finalName>${project.parent.artifactId}</finalName>
                     <outputDirectory>${project.parent.build.directory}</outputDirectory>
                     <descriptors>
                         <descriptor>${project.basedir}/build/assembly/assembly.xml</descriptor>
