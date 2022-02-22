@@ -41,7 +41,9 @@ start() {
   done
   echo
   health
-  startSupervisor
+  if [ "${IN_CONTAINER}" != true ]; then
+    startSupervisor
+  fi
   echoGreen "Application Started"
 }
 # 停止

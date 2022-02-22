@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 DIR=$(cd "$(dirname $0)" && pwd)
+IN_CONTAINER=true
 case $1 in
 "start")
   source ${DIR}/start.sh
