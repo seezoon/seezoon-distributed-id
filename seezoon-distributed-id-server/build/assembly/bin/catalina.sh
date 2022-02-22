@@ -23,7 +23,7 @@ start() {
     echo "JAVA_OPTS=${JAVA_OPTS}"
   fi
 
-  SERVER_OTPS="${SERVER_OTPS} --spring.pid.file=${PID_FILE} --spring.pid.write-on-lifecycle=RUNNING"
+  SERVER_OTPS="${SERVER_OTPS} --spring.pid.file=${PID_FILE}"
   echo "SERVER_OTPS=${SERVER_OTPS}"
 
   if [ ! -d logs ]; then
