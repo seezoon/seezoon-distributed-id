@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
-    <property name="LOG_HOME" value="./logs"/>
+    <property name="LOG_HOME" value="${LOG_PATH:-./logs}"/>
     <property name="LOG_FILE" value="seezoon"/>
     <property name="LOG_PATTERN"
             value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} %logger{10} - %msg%n"/>
