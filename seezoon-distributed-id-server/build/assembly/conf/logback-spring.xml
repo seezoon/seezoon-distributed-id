@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
     <property name="LOG_HOME" value="${LOG_PATH:-./logs}"/>
     <property name="LOG_FILE" value="seezoon"/>
