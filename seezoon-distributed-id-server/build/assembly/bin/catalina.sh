@@ -2,10 +2,11 @@
 set -e
 WORK_DIR=$(cd "$(dirname $0)/.." && pwd)
 cd "${WORK_DIR}"
-source conf/setenv.sh
 APP_NAME="${WORK_DIR##*/}"
 # 添加全路径是为了进程检测
 PID_FILE="${WORK_DIR}/bin/pid"
+CONF_DIR=./conf
+source ${CONF_DIR}/setenv.sh
 echo "WORK_DIR=${WORK_DIR},APP_NAME=${APP_NAME}"
 
 # 启动
@@ -16,14 +17,14 @@ start() {
     RUN_JAVA=${JAVA_HOME}/bin/java
     echo "JAVA_HOME=${JAVA_HOME}"
   fi
-  CLASS_PATH="-cp ./lib/*:./conf${CLASS_PATH}"
+  CLASS_PATH="-cp ./lib/*:${CONF_DIR}:${CLASS_PATH}"
   JAVA_OPTS="${CLASS_PATH} ${JVM_MEM} ${JVM_ARGS} ${JVM_DEBUG}"
 
   if [ -n "${JAVA_OPTS}" ]; then
     echo "JAVA_OPTS=${JAVA_OPTS}"
   fi
-
-  SERVER_OTPS="${SERVER_OTPS} --spring.pid.file=${PID_FILE}"
+  # spring.config.additional-location 优先级更高，classpath:/ 路径下多个只会取一个application.yml
+  SERVER_OTPS="${SERVER_OTPS} --spring.config.additional-location=${CONF_DIR}/ --spring.pid.file=${PID_FILE}"
   echo "SERVER_OTPS=${SERVER_OTPS}"
 
   if [ ! -d logs ]; then
@@ -131,11 +132,10 @@ EOF
 
 supervise() {
   log=${LOG_PATH}/supervior.log
-  time=$(date +"%Y-%m-%d %H:%M:%S")
-  echo "=============== ${time} ===============" >>${log}
-
   running=$(pidRunning)
   if [ ${running} -eq 0 ]; then
+    time=$(date +"%Y-%m-%d %H:%M:%S")
+    echo "=============== ${time} ===============" >>${log}
     echo "${APP_NAME} not running， now start a new process." >>${log}
     start
   fi
